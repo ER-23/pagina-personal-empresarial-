@@ -12,18 +12,21 @@
     <body>
         <header>
             <h1>Gestion de productos</h1>
-            <p>
-                Espacio para gestionar los productos registrados en la tienda. <br>
-                Use los botones para <strong>añadir</strong>, <strong>editar</strong>, 
-                o <strong>eliminar</strong> productos.
-            </p>
+
+            <article>
+                <p>
+                    Espacio para gestionar los productos registrados en la tienda. <br>
+                    Use los botones para <strong>añadir</strong>, <strong>editar</strong>, 
+                    o <strong>eliminar</strong> productos.
+                </p>
+            </article>
+
+            <article>
+                <button onclick="abrirPopup()">Añadir producto</button>
+            </article>
         </header>
 
         <main>
-            <p>Hola</p>
-
-            <button onclick="abrirPopup()">Añadir producto</button>
-
             <article id="popup" class="popup">
                 <form class="popup-contenido">
                     <label for="nombre">Nombre</label>
@@ -46,14 +49,19 @@
                             <input type="radio" name="tipo" value="accesorio">Accesorios
                         </label>
                     </div>
-                    
-                    <button type="submit">Enviar</button>
-                    <button onclick="cerrarPopup()">Cerrar</button>
+
+                    <div class="botones-form">
+                        <button type="button" onclick="cerrarPopup()" class="boton-negativo">Cerrar</button>
+                        <button type="submit">Enviar</button>
+                    </div>
                 </form>
             </article>
 
             <article class="lista-elementos">
-                
+                <p>
+                    No hay ningun producto registrado. <br>
+                    Añade algunos productos primero con el boton para añadir productos.
+                </p>
             </article>
         </main>
 

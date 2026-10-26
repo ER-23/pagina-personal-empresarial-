@@ -112,6 +112,14 @@ button:hover {
     box-shadow: 0 0 15px #7928ca;
 }
 
+.boton-negativo {
+    background: linear-gradient(90deg, #7F0000, #FF0000);
+}
+
+.boton-negativo:hover {
+    box-shadow: 0 0 15px #BD0003;
+}
+
 form {
     max-width: 600px;
     margin: 0 auto;
@@ -154,6 +162,12 @@ input[type="radio"] {
     background-color: transparent;
     border: initial;
     border-radius: 50%;
+}
+
+.botones-form {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 .opciones-radio {
@@ -204,8 +218,11 @@ footer {
 }
 
 .popup-contenido {
-    width: 100%;
-    max-width: 420px;
+    width: 90%;
+    max-width: 550px;
+    max-height: 80vh;
+    overflow-x: hidden;
+    overflow-y: auto;
     padding: 35px;
     border-radius: 12px;
     box-sizing: border-box;
