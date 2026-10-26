@@ -46,20 +46,21 @@
                     <label for="cantidad">Cantidad:</label>
                     <input type="number" id="cantidad" required>
 
-                    <label>Tipo de producto:</label>
-                    <div class="opciones-radio">
-                        <label>
-                            <input type="radio" name="tipo" value="juegos" required>Videojuegos
-                        </label>
+                    <label>Tipo de producto:
+                        <div class="opciones-radio">
+                            <label>
+                                <input type="radio" name="tipo" value="juegos" required>Videojuegos
+                            </label>
 
-                        <label>
-                            <input type="radio" name="tipo" value="consola">Consolas
-                        </label>
-                        
-                        <label>
-                            <input type="radio" name="tipo" value="accesorio">Accesorios
-                        </label>
-                    </div>
+                            <label>
+                                <input type="radio" name="tipo" value="consola">Consolas
+                            </label>
+                            
+                            <label>
+                                <input type="radio" name="tipo" value="accesorio">Accesorios
+                            </label>
+                        </div>
+                    </label>
 
                     <div class="botones-opuestos">
                         <button type="button" onclick="cerrarPopup()" class="boton-negativo">Cerrar</button>
@@ -69,10 +70,7 @@
             </article>
 
             <article id="lista-elementos" class="grid-elementos">
-                <p>
-                    No hay ningun producto registrado. <br>
-                    Añade algunos productos primero con el boton para añadir productos.
-                </p>
+                
             </article>
         </main>
 
