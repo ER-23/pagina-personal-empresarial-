@@ -12,7 +12,11 @@
     <body>
         <header>
             <h1>Gestion de productos</h1>
-            <p>Texto de ejemplo</p>
+            <p>
+                Espacio para gestionar los productos registrados en la tienda. <br>
+                Use los botones para <strong>añadir</strong>, <strong>editar</strong>, 
+                o <strong>eliminar</strong> productos.
+            </p>
         </header>
 
         <main>
@@ -28,11 +32,19 @@
                     <label for="cantidad">Cantidad</label>
                     <input type="number" id="cantidad" required>
 
-                    <div>
-                        <label for="tipo">Tipo de producto</label>
-                        <input type="radio" name="tipo" value="juegos" required>Videojuegos
-                        <input type="radio" name="tipo" value="consola">Consolas
-                        <input type="radio" name="tipo" value="accesorio">Accesorios
+                    <label>Tipo de producto</label>
+                    <div class="opciones-radio">
+                        <label>
+                            <input type="radio" name="tipo" value="juegos" required>Videojuegos
+                        </label>
+
+                        <label>
+                            <input type="radio" name="tipo" value="consola">Consolas
+                        </label>
+                        
+                        <label>
+                            <input type="radio" name="tipo" value="accesorio">Accesorios
+                        </label>
                     </div>
                     
                     <button type="submit">Enviar</button>
@@ -44,6 +56,16 @@
                 
             </article>
         </main>
+
+        <footer>
+            <section id="redes">
+                <h2>Nuestras redes sociales</h2>
+                <a href="https://www.facebook.com/profile.php?id=61595732810169"><img class="redes-img" src="Imagenes/FacebookLogo.png" alt="Imagen de facebook"></a>
+                <a href="https://www.tiktok.com/@arcadex_gaming"><img class="redes-img" src="Imagenes/TiktokLogo.png" alt="Imagen de Youtube"></a>
+                <a href="http://www.youtube.com/@Arcadex-GG"><img class="redes-img" src="Imagenes/YoutubeLogo.png" alt="Imagen de Tiktok"></a>
+            </section>
+            <p>&copy; Arcadex 2026. Todos los derechos reservados.</p>
+        </footer>
     </body>
 
     <script src="app.js"></script>
