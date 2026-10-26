@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="es">
+
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Productos | Arcadex</title>
+        <link rel="stylesheet" href="prueba.css">
+        <link rel="stylesheet" href="styles.css">
+    </head>
+
+    <body>
+        <header>
+            <h1>Gestion de productos</h1>
+            <p>Texto de ejemplo</p>
+        </header>
+
+        <main>
+            <p>Hola</p>
+
+            <button onclick="abrirPopup()">Añadir producto</button>
+
+            <article id="popup" class="popup">
+                <form class="popup-contenido">
+                    <label for="nombre">Nombre</label>
+                    <input type="text" id="nombre" required>
+
+                    <label for="cantidad">Cantidad</label>
+                    <input type="number" id="cantidad" required>
+
+                    <div>
+                        <label for="tipo">Tipo de producto</label>
+                        <input type="radio" name="tipo" value="juegos" required>Videojuegos
+                        <input type="radio" name="tipo" value="consola">Consolas
+                        <input type="radio" name="tipo" value="accesorio">Accesorios
+                    </div>
+                    
+                    <button type="submit">Enviar</button>
+                    <button onclick="cerrarPopup()">Cerrar</button>
+                </form>
+            </article>
+
+            <article class="lista-elementos">
+                
+            </article>
+        </main>
+    </body>
+
+    <script src="app.js"></script>
+</html>
