@@ -1,7 +1,83 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
+import ProductoCard from "../components/ProductoCard";
+import { obtenerProductos, crearProducto, actualizarProducto, eliminarProducto } from "../services/productoService";
+import FormularioProducto from "../components/FormularioProducto";
 
 function Productos () {
     const [popupAbierto, setPopupAbierto] = useState(false);
+    const [productos, setProductos] = useState([]);
+    const [cargando, setCargando] = useState(true);
+    const [error, setError] = useState("");
+    const [editandoProducto, setEditandoProducto] = useState(null);
+
+    useEffect(() => {
+        async function cargarProductos() {
+            try {
+                const datos = await obtenerProductos();
+                setProductos(datos);
+            } catch (error) {
+                setError(error.message);
+            } finally {
+                setCargando(false);
+            }
+        }
+
+        cargarProductos();
+    }, []);
+
+    async function manejarGuardar(producto) {
+        try {
+            if (editandoProducto) {
+                const actualizado = await actualizarProducto(
+                    editandoProducto._id,
+                    producto
+                );
+
+                setProductos(productos.map((p) => {
+                    p._id === actualizado._id ? actualizado : p
+                }))
+
+            } else {
+                const productoGuardado = await crearProducto(producto);
+
+                setProductos([...productos, productoGuardado]);
+            }
+
+            cerrarPopup();
+
+        } catch (error) {
+            console.error("Error al guardar:", error);
+            setError(error.message);
+        }
+    }
+
+    function abrirEdicion(producto) {
+        setEditandoProducto(producto);
+        setPopupAbierto(true);
+    }
+
+    function cerrarPopup() {
+        setPopupAbierto(false);
+        setEditandoProducto(null);
+    }
+
+    async function manejarEliminar(id) {
+        if (!window.confirm("¿Estás seguro de eliminar este producto?")) {
+            return;
+        }
+
+        try {
+            await eliminarProducto(id);
+
+            setProductos(productos.filter(
+                (producto) => producto._id !== id
+            ));
+            
+        } catch (error) {
+            console.log("Error al eliminar:", error);
+            setError(error.message);
+        }
+    }
 
     return (
         <>
@@ -17,7 +93,10 @@ function Productos () {
                 </article>
 
                 <article>
-                    <button onClick={() => setPopupAbierto(true)}>
+                    <button onClick={() => {
+                        setEditandoProducto(null);
+                        setPopupAbierto(true);
+                    }}>
                         Añadir producto
                     </button>
                 </article>
@@ -25,53 +104,34 @@ function Productos () {
 
             <main>
                 {popupAbierto && (
-                    <article id="popup" className="popup">
-                        <form className="poup-contenido">
-
-                            <label htmlFor="nombre">Nombre:</label>
-                            <input type="text" id="nombre" required />
-
-                            <label htmlFor="precio">Precio:</label>
-                            <input type="number" id="precio" required />
-
-                            <label htmlFor="cantidad">Cantidad:</label>
-                            <input type="number" id="cantidad" required />
-
-                            <label>Tipo de producto:</label>
-
-                            <div className="opciones-radio">
-                                <label>
-                                    <input type="radio" name="tipo" value="juegos" required />
-                                    Videojuegos
-                                </label>
-
-                                <label>
-                                    <input type="radio" name="tipo" value="consola" />
-                                    Consolas
-                                </label>
-
-                                <label>
-                                    <input type="radio" name="tipo" value="accesorio" />
-                                    Accesorios
-                                </label>
-                            </div>
-
-                            <div className="botones-opuestos">
-                                <button 
-                                    type="button" 
-                                    onClick={() => setPopupAbierto(false)}
-                                    className="boton-negativo"
-                                >
-                                    Cerrar
-                                </button>
-
-                                <button type="submit">Enviar</button>
-                            </div>
-                        </form>
-                    </article>
+                    <FormularioProducto
+                        onGuardar={manejarGuardar}
+                        onCerrar={() => setPopupAbierto(false)}
+                        productoEditar={editandoProducto}
+                    />
                 )}
 
                 <article id="lista-elementos" className="grid-elementos">
+                    {cargando && <p>Cargando productos...</p>}
+
+                    {error && <p>{error}</p>}
+
+                    {!cargando && !error && productos.length === 0 && (
+                        <p>No hay productos registrados.</p>
+                    )}
+
+                    {productos.map((producto) => (
+                        <ProductoCard
+                            key={producto._id}
+                            id={producto._id}
+                            nombre={producto.nombre}
+                            precio={producto.precio}
+                            cantidad={producto.cantidad}
+                            tipo={producto.tipo}
+                            onEditar={() => abrirEdicion(producto)}
+                            onEliminar={manejarEliminar}
+                        />
+                    ))}
 
                 </article>
             </main>
