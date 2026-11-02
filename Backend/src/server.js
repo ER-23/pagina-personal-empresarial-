@@ -4,6 +4,7 @@ import cors from "cors";
 
 import conectarDB from "./config/database.js";
 import productoRoutes from "./routes/productoRoutes.js";
+import authRoutes from "./routes/authRoutes.js"
 
 dotenv.config();
 
@@ -13,6 +14,7 @@ app.use(express.json());
 app.use(cors());
 
 app.use("/api/productos", productoRoutes);
+app.use("/api/auth", authRoutes);
 
 app.get("/", (req, res) => {
     res.send("Bienvenido a la API de Arcadex");

@@ -1,4 +1,13 @@
+import { obtenerToken } from "./authService";
+
 const API_URL = "http://localhost:3000/api/productos";
+
+function obtenerHeaders() {
+    return {
+        "Content-Type": "application/json",
+        "Authorization": `Bearer ${obtenerToken()}`
+    }
+}
 
 export async function obtenerProductos() {
     const respuesta = await fetch(API_URL);
@@ -13,9 +22,7 @@ export async function obtenerProductos() {
 export async function crearProducto(producto) {
     const respuesta = await fetch(API_URL, {
         method:"POST",
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers: obtenerHeaders(),
         body: JSON.stringify(producto)
     });
 
@@ -29,9 +36,7 @@ export async function crearProducto(producto) {
 export async function actualizarProducto(id, producto) {
     const respuesta = await fetch(`${API_URL}/${id}`, {
         method: "PUT",
-        headers: {
-            "Content-Type": "application/json"
-        },
+        headers: obtenerHeaders(),
         body: JSON.stringify(producto)
     });
 
@@ -44,7 +49,8 @@ export async function actualizarProducto(id, producto) {
 
 export async function eliminarProducto(id) {
     const respuesta =  await fetch(`${API_URL}/${id}`, {
-        method:"DELETE"
+        method:"DELETE",
+        headers: obtenerHeaders()
     });
 
     if (!respuesta.ok) {

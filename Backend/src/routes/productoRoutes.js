@@ -1,4 +1,5 @@
 import express from "express";
+import verificarToken from "../middleware/verificarToken.js";
 
 import {
     obtenerProductos,
@@ -14,10 +15,10 @@ router.get("/", obtenerProductos);
 
 router.get("/:id", obtenerProducto);
 
-router.post("/", crearProducto);
+router.post("/", verificarToken, crearProducto);
 
-router.put("/:id", actualizarProducto);
+router.put("/:id", verificarToken, actualizarProducto);
 
-router.delete("/:id", eliminarProducto);
+router.delete("/:id", verificarToken, eliminarProducto);
 
 export default router;

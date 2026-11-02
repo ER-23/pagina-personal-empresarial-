@@ -2,8 +2,10 @@ import { useState, useEffect } from "react"
 import ProductoCard from "../components/ProductoCard";
 import { obtenerProductos, crearProducto, actualizarProducto, eliminarProducto } from "../services/productoService";
 import FormularioProducto from "../components/FormularioProducto";
+import { obtenerToken } from "../services/authService";
 
 function Productos () {
+    const token = obtenerToken();
     const [popupAbierto, setPopupAbierto] = useState(false);
     const [productos, setProductos] = useState([]);
     const [cargando, setCargando] = useState(true);
@@ -92,14 +94,19 @@ function Productos () {
                     </p>
                 </article>
 
-                <article>
-                    <button onClick={() => {
-                        setEditandoProducto(null);
-                        setPopupAbierto(true);
-                    }}>
-                        Añadir producto
-                    </button>
-                </article>
+                
+                    {token && (
+                        <article>
+                            <button onClick={() => {
+                                setEditandoProducto(null);
+                                setPopupAbierto(true);
+                            }}>
+                                Añadir producto
+                            </button>
+                        </article>
+                    )}
+                    
+                
             </header>
 
             <main>
