@@ -36,7 +36,7 @@ function Productos () {
                 );
 
                 setProductos(productos.map((p) => {
-                    p._id === actualizado._id ? actualizado : p
+                    return p._id === actualizado._id ? actualizado : p
                 }))
 
             } else {
