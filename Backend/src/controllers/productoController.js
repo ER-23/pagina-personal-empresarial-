@@ -1,4 +1,4 @@
-import Producto from "../models/Producto";
+import Producto from "../models/Producto.js";
 
 //Obtener todos los productos
 export const obtenerProductos = async (req,res) => {
@@ -21,7 +21,7 @@ export const obtenerProducto = async (req, res) => {
             });
         }
 
-        res.status(200).jsonn(producto);
+        res.status(200).json(producto);
     } catch (error) {
         res.status(500).json({ mensaje: error.message });
     }
